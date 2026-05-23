@@ -1,0 +1,68 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "autosave": "off",
+  "cli_default_open_behavior": "new_window",
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "project_panel": {
+    "indent_size": 16.0,
+    "entry_spacing": "comfortable",
+    "dock": "left",
+    "default_width": 350,
+  },
+  "outline_panel": {
+    "dock": "right",
+    "default_width": 350,
+  },
+  "collaboration_panel": {
+    "dock": "right",
+    "default_width": 350,
+  },
+  "git_panel": {
+    "dock": "right",
+    "default_width": 350,
+  },
+  "agent": {
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "dock": "right",
+    "default_width": 350,
+  },
+  "base_keymap": "JetBrains",
+  "icon_theme": "Zed (Default)",
+  "ui_font_family": ".SystemUIFont",
+  "ui_font_size": 16,
+  "buffer_font_family": "Consolas",
+  "buffer_font_fallbacks": ["ChillRoundF"],
+  "buffer_font_size": 14,
+  "buffer_line_height": { "custom": 1.5 },
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+  "languages": {
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+  },
+}
