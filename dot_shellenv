@@ -1,0 +1,45 @@
+export LANG=zh_CN.UTF-8
+export EDITOR=nano
+
+path_prepend() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+
+path_append() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="$PATH:$1" ;;
+  esac
+}
+
+path_prepend_if_exists() {
+  [ -d "$1" ] && path_prepend "$1"
+}
+
+export PROTO_HOME="$HOME/.proto"
+export GOPATH="$HOME/go"
+export BUN_INSTALL="$HOME/.bun"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PNPM_HOME="$HOME/Library/pnpm"
+
+path_prepend_if_exists "/opt/homebrew/sbin"
+path_prepend_if_exists "/opt/homebrew/bin"
+path_prepend_if_exists "/usr/local/sbin"
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.opencode/bin"
+path_prepend "$GOPATH/bin"
+path_prepend "$BUN_INSTALL/bin"
+path_prepend "$PNPM_HOME"
+path_prepend "$PROTO_HOME/bin"
+path_prepend "$PROTO_HOME/shims"
+
+path_append "$ANDROID_HOME/tools"
+path_append "$ANDROID_HOME/tools/bin"
+path_append "$ANDROID_HOME/platform-tools"
+
+export PATH
+
+unset -f path_prepend path_append path_prepend_if_exists
