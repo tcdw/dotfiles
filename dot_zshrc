@@ -1,0 +1,39 @@
+eval "$(starship init zsh)"
+
+# proto
+export PROTO_HOME="$HOME/.proto"
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+
+# direnv
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+# android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export GPG_TTY="$(tty)"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+export PATH="$HOME/go/bin:$HOME/.local/bin:$HOME/.opencode/bin:$PATH"
+
+ulimit -n 65536
+
+# Timidity configuration to use GeneralUser-GS soundfont by default
+export TIMIDITY_CONFIG="$HOME/.timidity/timidity.cfg"
+alias timidity='timidity -c ~/.timidity/timidity.cfg'
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
