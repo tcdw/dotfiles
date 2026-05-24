@@ -1,0 +1,66 @@
+# Custom prompt
+if [[ ${EUID} == 0 ]] ; then
+  PS1='\[\033[01;31m\]${HOSTNAME:=$(hostname)}\[\033[01;34m\] \W \$\[\033[00m\] '
+else
+  PS1='\[\033[01;32m\]${USER:=$(id -un)}@${HOSTNAME:=$(hostname)}\[\033[01;34m\] \w \$\[\033[00m\] '
+fi
+
+# Locale and defaults
+export LANG=zh_CN.UTF-8
+export EDITOR=nano
+
+# Base PATH
+export PATH="$HOME/.local/bin:/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# Golang
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Dart
+export PATH="$PATH:$HOME/.pub-cache/bin"
+
+# Ruby
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+  export PATH="$(gem environment gemdir)/bin:$PATH"
+fi
+
+# Java
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+
+# jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+if command -v jenv >/dev/null 2>&1; then
+  eval "$(jenv init -)"
+fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# IntelliJ IDEA
+export REACT_EDITOR="idea"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
+
+# nvs
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
+# direnv
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook bash)"
+fi
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
