@@ -29,10 +29,6 @@ fi
 export REACT_EDITOR="idea"
 export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
-# nvs
-export NVS_HOME="$HOME/.nvs"
-[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
-
 # direnv
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook bash)"
