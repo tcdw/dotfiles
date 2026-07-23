@@ -7,6 +7,11 @@ if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
 
+# jenv
+if command -v jenv >/dev/null 2>&1; then
+  eval "$(jenv init -)"
+fi
+
 export GPG_TTY="$(tty)"
 
 ulimit -n 65536
