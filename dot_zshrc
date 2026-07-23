@@ -20,7 +20,11 @@ ulimit -n 65536
 export TIMIDITY_CONFIG="$HOME/.timidity/timidity.cfg"
 alias timidity='timidity -c ~/.timidity/timidity.cfg'
 
+# yt-dlp with local browser cookies + all subs
+alias yt-dlp='yt-dlp --all-subs --cookies $HOME/Cookies/www.youtube.com_cookies.txt'
+
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
+# machine-local secrets only (never commit this file)
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

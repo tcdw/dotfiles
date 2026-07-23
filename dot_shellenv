@@ -2,6 +2,14 @@ export LANG=zh_CN.UTF-8
 export EDITOR=nano
 export REACT_EDITOR=idea
 
+# Local proxy (Clash Meta)
+export https_proxy=http://127.0.0.1:6152
+export http_proxy=http://127.0.0.1:6152
+export all_proxy=socks5://127.0.0.1:6153
+export NO_PROXY=localhost,127.0.0.1
+export ELECTRON_GET_USE_PROXY=true
+export GLOBAL_AGENT_HTTPS_PROXY=http://127.0.0.1:6152
+
 path_prepend() {
   case ":$PATH:" in
     *":$1:"*) ;;
@@ -41,7 +49,7 @@ path_prepend "$PNPM_HOME"
 path_prepend "$PROTO_HOME/bin"
 path_prepend "$PROTO_HOME/shims"
 
-# languages / tooling (formerly bashrc-only)
+# languages / tooling
 path_prepend_if_exists "$HOME/.pub-cache/bin"
 path_prepend_if_exists "/opt/homebrew/opt/ruby/bin"
 path_prepend_if_exists "/opt/homebrew/opt/openjdk@17/bin"
