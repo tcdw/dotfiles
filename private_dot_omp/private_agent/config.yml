@@ -1,0 +1,8 @@
+modelRoles:
+  default: opencode-go/grok-4.5
+symbolPreset: unicode
+theme:
+  dark: titanium
+setupVersion: 1
+disabledProviders:
+  - codex

@@ -1,0 +1,28 @@
+# secrets stay machine-local:
+# - macOS: Keychain item omp.longcat.api-key
+# - Windows: user env LONGCAT_API_KEY (set once; not per-shell)
+# - other: env LONGCAT_API_KEY
+providers:
+  longcat:
+    baseUrl: https://api.longcat.chat/openai
+{{- if eq .chezmoi.os "darwin" }}
+    apiKey: "!security find-generic-password -a \"$USER\" -s omp.longcat.api-key -w"
+{{- else }}
+    apiKey: LONGCAT_API_KEY
+{{- end }}
+    api: openai-completions
+    authHeader: true
+    discovery:
+      type: openai-models-list
+    models:
+      - id: LongCat-2.0
+        name: LongCat-2.0
+        reasoning: true
+        input: [text]
+        contextWindow: 1048576
+        maxTokens: 131072
+        cost:
+          input: 0
+          output: 0
+          cacheRead: 0
+          cacheWrite: 0
