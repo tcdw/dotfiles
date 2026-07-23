@@ -7,38 +7,32 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  },
   "autosave": "off",
-  "format_on_save": "off",
   "cli_default_open_behavior": "new_window",
   "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    },
     "github-copilot-cli": {
       "type": "registry",
-    },
-    "OpenCode (company-cn)": {
-      "type": "custom",
-      "command": "/Users/tcdw/.local/bin/ocp",
-      "args": ["acp", "company-cn"],
-    },
-    "OpenCode (company-intl)": {
-      "type": "custom",
-      "command": "/Users/tcdw/.local/bin/ocp",
-      "args": ["acp", "company-intl"],
-    },
-    "OpenCode (default)": {
-      "type": "custom",
-      "command": "/Users/tcdw/.local/bin/ocp",
-      "args": ["acp", "default"],
-    },
-    "OpenCode (self-cn)": {
-      "type": "custom",
-      "command": "/Users/tcdw/.local/bin/ocp",
-      "args": ["acp", "self-cn"],
-    },
-    "OpenCode (self-intl)": {
-      "type": "custom",
-      "command": "/Users/tcdw/.local/bin/ocp",
-      "args": ["acp", "self-intl"],
-    },
+    }
   },
   "project_panel": {
     "indent_size": 16.0,

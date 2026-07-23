@@ -22,7 +22,7 @@
 font-family = "Consolas"
 font-family = "ChillRoundF"
 font-family = "monospace"
-font-size = 16
+font-size = 18
 font-thicken = true
 
 # window-padding-x = 2
