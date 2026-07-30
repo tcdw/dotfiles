@@ -16,9 +16,27 @@ Not synced (stay on each machine):
 
 | OS | How |
 |---|---|
-| macOS | Keychain: `security add-generic-password -a "$USER" -s omp.longcat.api-key -w 'KEY' -U` |
-| Windows | User env `LONGCAT_API_KEY` (System Properties → Environment Variables), one-time |
-| Linux | User env `LONGCAT_API_KEY`, or swap the template branch to `secret-tool` / pass |
+| macOS | Keychain: `security add-generic-password -a "$USER" -s omp.<provider>.api-key -w 'KEY' -U` |
+| Windows | User env `<PROVIDER>_API_KEY` (System Properties → Environment Variables), one-time |
+| Linux | User env `<PROVIDER>_API_KEY`, or swap the template branch to `secret-tool` / pass |
+
+Providers / secret names:
+
+| provider | macOS Keychain service | env var |
+|---|---|---|
+| `longcat` | `omp.longcat.api-key` | `LONGCAT_API_KEY` |
+| `oproxy` | `omp.oproxy.api-key` | `OPROXY_API_KEY` |
+| `oproxy-claude` | `omp.oproxy-claude.api-key` | `OPROXY_CLAUDE_API_KEY` |
+
+```bash
+# macOS
+security add-generic-password -a "$USER" -s omp.oproxy.api-key -w 'KEY' -U
+security add-generic-password -a "$USER" -s omp.oproxy-claude.api-key -w 'KEY' -U
+
+# Linux / other shells omp actually launches from
+export OPROXY_API_KEY='…'
+export OPROXY_CLAUDE_API_KEY='…'
+```
 
 ## Workflow
 
