@@ -362,6 +362,15 @@ providers:
     apiKey: GOOGLE_API_KEY
 {{- end }}
 
+  # moonshotai: kimi via CN endpoint; key via Keychain on macOS, MOONSHOT_API_KEY env elsewhere
+  moonshotai:
+    baseUrl: https://api.moonshot.cn/v1
+{{- if eq .chezmoi.os "darwin" }}
+    apiKey: "!security find-generic-password -a \"$USER\" -s omp.moonshotai.api-key -w"
+{{- else }}
+    apiKey: MOONSHOT_API_KEY
+{{- end }}
+
 equivalence:
   overrides:
     oproxy/gpt-5.6: gpt-5.6
