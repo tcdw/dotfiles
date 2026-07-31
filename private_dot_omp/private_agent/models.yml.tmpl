@@ -7,7 +7,7 @@
 # Model limits/costs/capabilities filled from models.dev + pi-catalog metadata.
 providers:
   longcat:
-    baseUrl: https://api.longcat.chat/openai
+    baseUrl: https://api.longcat.chat/openai/v1
 {{- if eq .chezmoi.os "darwin" }}
     apiKey: "!security find-generic-password -a \"$USER\" -s omp.longcat.api-key -w"
 {{- else }}
@@ -353,6 +353,14 @@ providers:
         thinking:
           mode: effort
           efforts: [low, medium, high, xhigh, max]
+
+  # google: official Gemini API; key via Keychain on macOS, GOOGLE_API_KEY env elsewhere
+  google:
+{{- if eq .chezmoi.os "darwin" }}
+    apiKey: "!security find-generic-password -a \"$USER\" -s omp.google.api-key -w"
+{{- else }}
+    apiKey: GOOGLE_API_KEY
+{{- end }}
 
 equivalence:
   overrides:
