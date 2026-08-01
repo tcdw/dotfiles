@@ -362,7 +362,10 @@ providers:
     apiKey: GOOGLE_API_KEY
 {{- end }}
 
-  # moonshotai: kimi via CN endpoint; key via Keychain on macOS, MOONSHOT_API_KEY env elsewhere
+  # moonshotai: kimi via official CN endpoint. Full custom provider — the bundled
+  # catalog has no moonshot provider (only vercel-ai-gateway/opencode kimi variants).
+  # Metadata: models.dev moonshotai-cn + live /v1/models (2026-08-01).
+  # Key: Keychain on macOS, MOONSHOT_API_KEY env elsewhere.
   moonshotai:
     baseUrl: https://api.moonshot.cn/v1
 {{- if eq .chezmoi.os "darwin" }}
@@ -370,6 +373,83 @@ providers:
 {{- else }}
     apiKey: MOONSHOT_API_KEY
 {{- end }}
+    api: openai-completions
+    authHeader: true
+    models:
+      - id: kimi-k2.5
+        name: Kimi K2.5
+        reasoning: true
+        input: [text, image]
+        contextWindow: 262144
+        maxTokens: 262144
+        cost:
+          input: 0.6
+          output: 3
+          cacheRead: 0.1
+          cacheWrite: 0
+        thinking:
+          mode: effort
+          efforts: [minimal, low, medium, high, xhigh]
+
+      - id: kimi-k2.6
+        name: Kimi K2.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 262144
+        maxTokens: 262144
+        cost:
+          input: 0.95
+          output: 4
+          cacheRead: 0.16
+          cacheWrite: 0
+        thinking:
+          mode: effort
+          efforts: [minimal, low, medium, high, xhigh]
+
+      - id: kimi-k2.7-code
+        name: Kimi K2.7 Code
+        reasoning: true
+        input: [text, image]
+        contextWindow: 262144
+        maxTokens: 262144
+        cost:
+          input: 0.95
+          output: 4
+          cacheRead: 0.19
+          cacheWrite: 0
+        thinking:
+          mode: effort
+          efforts: [minimal, low, medium, high, xhigh]
+
+      - id: kimi-k2.7-code-highspeed
+        name: Kimi K2.7 Code HighSpeed
+        reasoning: true
+        input: [text, image]
+        contextWindow: 262144
+        maxTokens: 262144
+        cost:
+          input: 1.9
+          output: 8
+          cacheRead: 0.38
+          cacheWrite: 0
+        thinking:
+          mode: effort
+          efforts: [minimal, low, medium, high, xhigh]
+
+      - id: kimi-k3
+        name: Kimi K3
+        reasoning: true
+        input: [text, image]
+        contextWindow: 1048576
+        maxTokens: 131072
+        cost:
+          input: 3
+          output: 15
+          cacheRead: 0.3
+          cacheWrite: 0
+        thinking:
+          mode: effort
+          efforts: [low, high, max]
 
 equivalence:
   overrides:

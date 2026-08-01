@@ -1,5 +1,5 @@
 modelRoles: 
-  default: deepseek/deepseek-v4-flash:max
+  default: oproxy-claude/claude-fable-5:xhigh
   vision: google/gemini-3.6-flash:high
   tiny: deepseek/deepseek-v4-flash
   commit: deepseek/deepseek-v4-flash:high
