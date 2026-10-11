@@ -27,12 +27,22 @@
   "autosave": "off",
   "cli_default_open_behavior": "new_window",
   "agent_servers": {
-    "opencode": {
-      "type": "registry"
+    "oh-my-pi": {
+      "type": "custom",
+      "command": "/Users/tcdw/.bun/bin/omp",
+      "args": [
+        "acp"
+      ]
     },
-    "github-copilot-cli": {
-      "type": "registry",
-    }
+    "dim": {
+      "default_config_options": {
+        "permission": "full-access",
+        "thought_level": "max"
+      },
+      "type": "custom",
+      "command": "dim",
+      "args": ["acp"],
+    },
   },
   "project_panel": {
     "indent_size": 16.0,
