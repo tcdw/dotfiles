@@ -1,7 +1,8 @@
 {{- if eq .chezmoi.os "windows" }}
+.config
 .config/zed
 .config/zed/**
 {{- else }}
-AppData/Roaming/Zed
-AppData/Roaming/Zed/**
+AppData
+AppData/**
 {{- end }}
