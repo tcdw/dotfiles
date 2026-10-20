@@ -1,0 +1,4 @@
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# Read by every zsh invocation, including non-interactive and non-login shells.
+[ -f "$HOME/.shellenv" ] && source "$HOME/.shellenv"

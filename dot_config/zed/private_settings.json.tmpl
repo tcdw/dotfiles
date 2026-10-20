@@ -29,7 +29,7 @@
   "agent_servers": {
     "oh-my-pi": {
       "type": "custom",
-      "command": "/Users/tcdw/.bun/bin/omp",
+      "command": "{{ .chezmoi.homeDir }}/.bun/bin/omp",
       "args": [
         "acp"
       ]
@@ -71,9 +71,9 @@
   },
   "base_keymap": "JetBrains",
   "icon_theme": "Zed (Default)",
-  "ui_font_family": ".SystemUIFont",
+  "ui_font_family": "{{ if eq .chezmoi.os "darwin" }}.SystemUIFont{{ else }}.ZedSans{{ end }}",
   "ui_font_size": 16,
-  "buffer_font_family": "Consolas",
+  "buffer_font_family": "{{ if eq .chezmoi.os "darwin" }}Consolas{{ else }}.ZedMono{{ end }}",
   "buffer_font_fallbacks": ["ChillRoundF"],
   "buffer_font_size": 14,
   "buffer_line_height": { "custom": 1.5 },

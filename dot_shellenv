@@ -2,13 +2,21 @@ export LANG=zh_CN.UTF-8
 export EDITOR=nano
 export REACT_EDITOR=idea
 
-# Local proxy (Clash Meta)
-export https_proxy=http://127.0.0.1:6152
-export http_proxy=http://127.0.0.1:6152
-export all_proxy=socks5://127.0.0.1:6153
+# Local proxy (Clash): macOS 6152/6153, Linux 7890
+_os="$(uname -s)"
+_proxy_http=http://127.0.0.1:6152
+_proxy_socks=socks5://127.0.0.1:6153
+if [ "$_os" = "Linux" ]; then
+  _proxy_http=http://localhost:7890
+  _proxy_socks=socks5://localhost:7890
+fi
+export https_proxy="$_proxy_http"
+export http_proxy="$_proxy_http"
+export all_proxy="$_proxy_socks"
 export NO_PROXY=localhost,127.0.0.1
 export ELECTRON_GET_USE_PROXY=true
-export GLOBAL_AGENT_HTTPS_PROXY=http://127.0.0.1:6152
+export GLOBAL_AGENT_HTTPS_PROXY="$_proxy_http"
+unset _proxy_http _proxy_socks
 
 path_prepend() {
   case ":$PATH:" in
@@ -35,12 +43,25 @@ path_append_if_exists() {
 export PROTO_HOME="$HOME/.proto"
 export GOPATH="$HOME/go"
 export BUN_INSTALL="$HOME/.bun"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PNPM_HOME="$HOME/Library/pnpm"
 
-path_prepend_if_exists "/opt/homebrew/sbin"
-path_prepend_if_exists "/opt/homebrew/bin"
+case "$_os" in
+  Darwin)
+    export ANDROID_HOME="$HOME/Library/Android/sdk"
+    export PNPM_HOME="$HOME/Library/pnpm"
+    ;;
+  Linux)
+    export ANDROID_HOME="$HOME/Android/Sdk"
+    export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
+    ;;
+esac
+
+for _brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew; do
+  path_prepend_if_exists "$_brew_prefix/sbin"
+  path_prepend_if_exists "$_brew_prefix/bin"
+done
+unset _brew_prefix
 path_prepend_if_exists "/usr/local/sbin"
+
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.opencode/bin"
 path_prepend "$GOPATH/bin"
@@ -51,16 +72,17 @@ path_prepend "$PROTO_HOME/shims"
 
 # languages / tooling
 path_prepend_if_exists "$HOME/.pub-cache/bin"
-path_prepend_if_exists "/opt/homebrew/opt/ruby/bin"
-path_prepend_if_exists "/opt/homebrew/opt/openjdk@17/bin"
-path_prepend_if_exists "$HOME/.jenv/bin"
-path_prepend_if_exists "/Applications/IntelliJ IDEA.app/Contents/MacOS"
 
-if command -v gem >/dev/null 2>&1; then
-  _gemdir="$(gem environment gemdir 2>/dev/null)"
-  [ -n "$_gemdir" ] && path_prepend "$_gemdir/bin"
-  unset _gemdir
-fi
+path_prepend_if_exists "$HOME/.jenv/bin"
+
+case "$_os" in
+  Darwin)
+    path_prepend_if_exists "/Applications/IntelliJ IDEA.app/Contents/MacOS"
+    ;;
+  Linux)
+    path_prepend_if_exists "$HOME/.local/share/JetBrains/Toolbox/scripts"
+    ;;
+esac
 
 path_append_if_exists "$ANDROID_HOME/tools"
 path_append_if_exists "$ANDROID_HOME/tools/bin"
@@ -68,4 +90,5 @@ path_append_if_exists "$ANDROID_HOME/platform-tools"
 
 export PATH
 
+unset _os
 unset -f path_prepend path_append path_prepend_if_exists path_append_if_exists
