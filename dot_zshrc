@@ -58,3 +58,9 @@ alias yt-dlp='yt-dlp --all-subs'
 
 # machine-local secrets only (never commit this file)
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+
+# >>> seedmux agent-shims >>>
+# Seedmux 生成:只在 seedmux 的 pane 里把 agent shim 目录重新前置(登录壳
+# 的 path_helper / brew shellenv 会把它挤到后面)。整段可整体删除
+if [ -n "$SEEDMUX_STATE_SOCK" ]; then PATH="$HOME/.seedmux/shims:$PATH"; fi
+# <<< seedmux agent-shims <<<
